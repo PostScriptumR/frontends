@@ -6,7 +6,7 @@ const useShowWalletConnector = () => {
 
   const showWalletConnector = useMemo(() => pathname.startsWith("/developer-nft") || pathname.startsWith("/bridge"), [pathname])
 
-  return showWalletConnector
+  return showWalletConnector || true
 }
 
 export default useShowWalletConnector

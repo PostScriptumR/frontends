@@ -18,6 +18,10 @@ import RollupScanBlock from "@/pages/rollup/block"
 import RollupScanChunk from "@/pages/rollup/chunk"
 import RollupScanChunkDetail from "@/pages/rollup/chunk/detail"
 import RollupScan from "@/pages/rollup/index"
+import ScrollSkelly from "@/pages/skelly"
+import SkellyDashboard from "@/pages/skelly/Dashboard"
+import SkellyBadge from "@/pages/skelly/badge"
+import MintProfile from "@/pages/skelly/mint"
 import Terms from "@/pages/terms"
 import { isSepolia } from "@/utils"
 
@@ -223,6 +227,30 @@ const mainnetRoutes = [
     path: "/developer-nft/mint",
     fullPath: "/developer-nft/mint",
     element: <MintNFT />,
+  },
+  {
+    name: "Scroll Skelly",
+    path: "/scroll-skelly",
+    element: <ScrollSkelly />,
+    isHiddenFooter: true,
+  },
+  {
+    name: "Scroll Skelly",
+    path: "/scroll-skelly/mint",
+    element: <MintProfile />,
+    isHiddenFooter: true,
+  },
+  {
+    name: "Scroll Skelly",
+    path: "/scroll-skelly/dashboard",
+    element: <SkellyDashboard />,
+    isHiddenFooter: true,
+  },
+  {
+    name: "Scroll Skelly",
+    path: "/scroll-skelly/badge",
+    element: <SkellyBadge />,
+    isHiddenFooter: true,
   },
 ]
 
