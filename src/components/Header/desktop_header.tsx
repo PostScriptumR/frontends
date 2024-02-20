@@ -269,7 +269,7 @@ const App = ({ currentMenu }) => {
 
   return (
     <StyledBox bgColor={navbarBg} dark={dark}>
-      <Announcement />
+      {/* <Announcement /> */}
       <Container>
         <HeaderContainer>
           <NavLink to="/" className="flex">

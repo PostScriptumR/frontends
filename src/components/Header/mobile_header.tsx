@@ -233,7 +233,7 @@ const App = ({ currentMenu }) => {
       className={open ? "active" : ""}
       sx={{ backgroundColor: navbarBg && !open ? `themeBackground[${navbarBg}]` : dark ? "themeBackground.dark" : "themeBackground.light" }}
     >
-      <Announcement />
+      {/* <Announcement /> */}
       <NavStack direction="row" justifyContent="space-between" alignItems="center">
         <NavLink to="/" className="flex">
           <Box onClick={() => toggleDrawer(false)}>
