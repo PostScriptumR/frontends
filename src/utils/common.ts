@@ -24,10 +24,9 @@ export const generateExploreLink = (explorer, hash, type = "tx") => {
   return `${explorer}/${type}/${hash}`
 }
 
-// TODO: should be isMainnet
-export const isProduction = process.env.NEXT_PUBLIC_SCROLL_ENVIRONMENT === process.env.NEXT_PUBLIC_MAIN_ENVIRONMENT
+export const isMainnet = process.env.NEXT_PUBLIC_SCROLL_ENVIRONMENT === process.env.NEXT_PUBLIC_MAIN_ENVIRONMENT
 export const isSepolia = process.env.NEXT_PUBLIC_SCROLL_ENVIRONMENT === "Sepolia"
-export const networkType = isProduction ? "mainnet" : "testnet"
+export const networkType = isMainnet ? "mainnet" : "testnet"
 export const isValidEmail = (email: string): boolean => {
   const emailRegex: RegExp = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
   return emailRegex.test(email)

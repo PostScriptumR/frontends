@@ -4,7 +4,7 @@ import { useMemo } from "react"
 import { Stack } from "@mui/material"
 import { styled } from "@mui/system"
 
-import { isProduction } from "@/utils"
+import { isMainnet } from "@/utils"
 
 const AnnouncementStack = styled<any>(Stack, {
   shouldForwardProp: prop => prop !== "production",
@@ -29,13 +29,13 @@ const Announcement = () => {
   const isPortal = pathname === "/portal"
 
   const announcementContent = useMemo(() => {
-    if (isProduction && (isHome || isPortal)) {
+    if (isMainnet && (isHome || isPortal)) {
       return (
         <>
           Scroll {process.env.NEXT_PUBLIC_SCROLL_ENVIRONMENT} is now live. <strong>Try it!</strong>
         </>
       )
-    } else if (!isProduction) {
+    } else if (!isMainnet) {
       return (
         <>
           You are on the Scroll {process.env.NEXT_PUBLIC_SCROLL_ENVIRONMENT} Testnet website. Return to <strong>Mainnet</strong>
@@ -43,21 +43,21 @@ const Announcement = () => {
       )
     }
     return null
-  }, [isProduction, isHome, isPortal])
+  }, [isMainnet, isHome, isPortal])
 
   const rightHref = useMemo(() => {
-    if (isProduction && (isHome || isPortal)) {
+    if (isMainnet && (isHome || isPortal)) {
       return "/portal"
-    } else if (!isProduction) {
+    } else if (!isMainnet) {
       return "https://scroll.io/"
     }
     return ""
-  }, [isProduction, isHome, isPortal])
+  }, [isMainnet, isHome, isPortal])
 
   return (
     announcementContent && (
       <a href={rightHref} rel="noopener noreferrer">
-        <AnnouncementStack production={isProduction}>{announcementContent}</AnnouncementStack>
+        <AnnouncementStack production={isMainnet}>{announcementContent}</AnnouncementStack>
       </a>
     )
   )

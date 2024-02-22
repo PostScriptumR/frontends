@@ -1,36 +1,20 @@
 "use client"
 
-import { orderBy } from "lodash"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 
 import { Tune as TuneIcon } from "@mui/icons-material"
 import { Box, Modal, Typography } from "@mui/material"
 import { styled } from "@mui/system"
 
-import ArticleCard from "@/components/ArticleCard"
 import SectionWrapper from "@/components/SectionWrapper"
 import useCheckViewport from "@/hooks/useCheckViewport"
 
-import blogSource from "./[blogId]/data.json"
+import { BlogList } from "./BlogList"
 
 const BlogContainer = styled(Box)(({ theme }) => ({
   padding: "0 6rem 14rem",
   [theme.breakpoints.down("md")]: {
     padding: "0 2rem 9rem",
-  },
-}))
-
-const BlogBox = styled(Box)(({ theme }) => ({
-  marginBottom: "9rem",
-  [theme.breakpoints.down("md")]: {
-    marginBottom: "0",
-    padding: "3rem 0",
-    "&:not(:last-of-type)": {
-      borderBottom: `1px solid ${(theme as any).vars.palette.themeBackground.highlight}`,
-    },
-    "&:first-of-type": {
-      padding: "0 0 3rem",
-    },
   },
 }))
 
@@ -147,18 +131,6 @@ const FilterItem = styled(Typography)(({ theme }) => ({
   },
 }))
 
-const BlogList = styled("ul")(({ theme }) => ({
-  display: "flex",
-  flexDirection: "column",
-  justifyContent: "space-between",
-  width: "100%",
-  [theme.breakpoints.down("md")]: {
-    borderRight: "none",
-    marginBottom: "0",
-    justifyContent: "center",
-  },
-}))
-
 const Blog = () => {
   const { isDesktop } = useCheckViewport()
   const listType = ["Newest", "Oldest"]
@@ -167,20 +139,10 @@ const Blog = () => {
   const handleFilterOpen = () => setFilterOpen(true)
   const handleFilterClose = () => setFilterOpen(false)
 
-  const [blogs, setBlogs] = useState(blogSource)
   const [queryForm, setQueryForm] = useState({
     sort: "Newest",
     category: "All",
   })
-
-  useEffect(() => {
-    const blogs = orderBy(
-      blogSource.filter(blog => blog.type === queryForm.category || queryForm.category === "All"),
-      "date",
-      queryForm.sort === "Newest" ? "desc" : "asc",
-    )
-    setBlogs(blogs)
-  }, [queryForm])
 
   const hanleFilter = (attr: string, value: string) => {
     handleFilterClose()
@@ -188,18 +150,6 @@ const Blog = () => {
       ...queryForm,
       [attr]: value,
     })
-  }
-
-  const renderBlogs = () => {
-    return (
-      <BlogList>
-        {blogs.map(blog => (
-          <BlogBox key={blog.title}>
-            <ArticleCard small={!isDesktop} blog={blog} />
-          </BlogBox>
-        ))}
-      </BlogList>
-    )
   }
 
   const renderFilter = () => {
@@ -282,7 +232,7 @@ const Blog = () => {
         </Header>
         <BlogBody>
           {renderFilter()}
-          {renderBlogs()}
+          <BlogList sort={queryForm.sort} category={queryForm.category} isDesktop={isDesktop} />
         </BlogBody>
       </SectionWrapper>
     </BlogContainer>

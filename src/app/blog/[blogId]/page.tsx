@@ -1,12 +1,13 @@
 import type { Metadata } from "next"
 import { headers } from "next/headers"
 
-import blogSource from "./data.json"
+import { getPost } from "@/utils"
+
 import Detail from "./detail"
 
 export async function generateMetadata({ params }): Promise<Metadata> {
   const { origin } = new URL(headers().get("x-url")!)
-  const currentBlog = blogSource.find(blog => blog.id === params.blogId)
+  const currentBlog = await getPost(params.blogId, "json")
 
   const title = `${currentBlog?.title} - Scroll`
   const description = currentBlog?.summary
